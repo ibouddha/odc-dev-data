@@ -50,3 +50,9 @@
   -webkit-animation:slide-top .5s cubic-bezier(.25,.46,.45,.94) both;animation:slide-top .5s cubic-bezier(.25,.46,.45,.94) both}
 
 .swiper-slide .card{-webkit-animation:flip-2-ver-right-bck .5s cubic-bezier(.455,.03,.515,.955) both;animation:flip-2-ver-right-bck .5s cubic-bezier(.455,.03,.515,.955) both} */
+
+
+
+.scrollbar-none::-webkit-scrollbar{
+  display: none;
+}

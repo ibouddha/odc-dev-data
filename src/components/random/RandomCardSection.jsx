@@ -6,20 +6,23 @@ import { Volume, VolumeX } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
 
 const { SwiperSlide } = require("swiper/react");
-const { RandomChoiceCard } = require("../cards/ChoiseCard");
+const { RandomChoiceCard, RandomChoiceCardSkeleton } = require("../cards/ChoiseCard");
 import { Swiper } from "swiper/react";
 
 export const RandomChoiceSection = () => {
   const [choices, setChoices] = useState([]);
   const [muted, setMuted] = useState(false);
   const { data, dispatch } = useContext(PromoContext)
+  const [loading, setLoading] = useState(true);
 
 
   const fetchChoices = async () => {
+    setLoading(true);
     const result = await getStudents(data?.promo?.id);
     if (result) {
       setChoices(result);
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -44,7 +47,8 @@ export const RandomChoiceSection = () => {
       }
         </button>
       </div>
-      {choices.length > 0 && <SwiperView choices={choices} muted={muted} />}
+      {choices.length > 0 && !loading && <SwiperView choices={choices} muted={muted} />}
+      {loading && <SwiperViewSkeleton />}
     </div>
   );
 };
@@ -167,3 +171,20 @@ const RandomChoiceDice = ({ isLoandingChoice, handleRandomChoice }) => {
     </button>
   );
 };
+
+export const SwiperViewSkeleton = () => {
+  return (
+    <div className="mt-10 py-4">
+
+    <div className=" flex gap-4 overflow-x-auto scrollbar-none">
+      {[...Array(5).keys()].map((i) => (
+        <RandomChoiceCardSkeleton key={i} />
+      ))}
+    </div>
+      <div className="mt-8 flex justify-center p-4">
+        <RandomChoiceDice
+        />
+      </div>
+    </div>
+  );
+}
