@@ -59,9 +59,9 @@ export const RandomChoiceCardSkeleton = () => {
           }`}
         >
         </div>
-        <div className="animate-pulse h-4 w-20 mt-8">
+        <div className="animate-pulse h-3 w-28 mt-8 bg-slate-400">
         </div>
-        <div className="animate-pulse h-2 w-16 mt-8">
+        <div className="animate-pulse h-2 w-20 mt-4 bg-slate-400">
         </div>
       </div>
     </div>

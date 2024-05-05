@@ -36,8 +36,11 @@ export const TopBar = () => {
     <nav className="fixed top-0 z-50 w-full ">
       <div className="px-3 py-3 lg:px-5 lg:pl-3">
         <div className="flex items-center justify-between">
-          <div className="flex items-center">
+          <div className="items-center hidden sm:flex">
+            <a href="/">
+
         <Image src="/logo.png" alt="logo" width={80} height={80} className="hidden sm:flex" />
+            </a>
           {data?.promo ? (
             <div className="relative ml-4 flex items-center">
               <button
