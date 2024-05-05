@@ -1,3 +1,4 @@
+import { getStudents } from "@/db/fetchdata";
 import clsx from "clsx";
 import { useState } from "react";
 
@@ -7,6 +8,7 @@ import { Swiper } from "swiper/react";
 
 export const RandomChoiceSection = () => {
     const [isLoandingChoice, setIsLoandingChoice] = useState(false);
+    getStudents()
   
     const choices = [
       {
