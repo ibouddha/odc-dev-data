@@ -1,8 +1,9 @@
 import { defaultChoice } from "@/constants";
+import { PromoContext } from "@/context/PromoContext";
 import { getStudents } from "@/db/fetchdata";
 import clsx from "clsx";
 import { Volume, VolumeX } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 const { SwiperSlide } = require("swiper/react");
 const { RandomChoiceCard } = require("../cards/ChoiseCard");
@@ -11,17 +12,19 @@ import { Swiper } from "swiper/react";
 export const RandomChoiceSection = () => {
   const [choices, setChoices] = useState([]);
   const [muted, setMuted] = useState(false);
+  const { data, dispatch } = useContext(PromoContext)
+
 
   const fetchChoices = async () => {
-    const data = await getStudents();
-    if (data) {
-      setChoices(data);
+    const result = await getStudents(data?.promo?.id);
+    if (result) {
+      setChoices(result);
     }
   };
 
   useEffect(() => {
     fetchChoices();
-  }, []);
+  }, [data]);
 
   return (
     <div className="p-4 bg-white dark:bg-slate-900 rounded-md">
@@ -71,7 +74,6 @@ const SwiperView = ({ choices = [], muted }) => {
     while (prevChoise === random) {
       random = Math.floor(Math.random() * choices.length);
     }
-    // let choice = choices[random];
     playSound();
     swipper.slideTo(random, 2000);
     setShowDefaultChoice(false);
@@ -112,7 +114,7 @@ const SwiperView = ({ choices = [], muted }) => {
           },
           1078: {
             slidesPerView: 5,
-            spaceBetween: 100,
+            spaceBetween: 30,
           },
         }}
       >
@@ -146,7 +148,9 @@ const SwiperView = ({ choices = [], muted }) => {
 
 const RandomChoiceDice = ({ isLoandingChoice, handleRandomChoice }) => {
   return (
-    <button title="Random Choice" onClick={handleRandomChoice}>
+    <button title="Random Choice" onClick={handleRandomChoice}
+    disabled={isLoandingChoice}
+    >
       <svg
         width="80"
         height="80"

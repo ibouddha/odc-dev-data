@@ -14,14 +14,24 @@ export const getPromos = async () => {
     return Promos;
 }
 
-export const getStudents = async () => {
+export const getStudents = async (promo_id = null) => {
     const querySnapshot = await getDocs(collection(db, "Students"));
     const students = [];
     querySnapshot.forEach((doc) => {
+        if(promo_id){
+            if(doc.data().promo_id === promo_id){
+                students.push({
+                    id: doc.id, 
+                    ...doc.data()
+                });
+            }
+        } else {
+        
         students.push({
             id: doc.id, 
             ...doc.data()
         });
+    }
     });
     return students;
 }
