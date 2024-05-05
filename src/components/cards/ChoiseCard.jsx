@@ -1,3 +1,4 @@
+import { defaultAvatar } from "@/constants";
 import clsx from "clsx";
 import Image from "next/image";
 
@@ -11,10 +12,10 @@ export const RandomChoiceCard = ({ choice, active = false }) => {
         <div className="flex justify-center flex-col items-center">
           <div className="py-[1px] bg-red-500 rounded-lg w-9/12"></div>
           <div className="mt-10 rounded-full h-14 w-14 bg-slate-500 overflow-hidden">
-            <Image
+          <Image
               width={100}
               height={100}
-              src={choice?.avatar ? choice?.avatar : "/images/defaultchoise.png"}
+              src={choice?.avatar ? choice?.avatar : defaultAvatar}
               alt={choice?.firstName
               }
               className="fill-black dark:fill-white rounded-full"
