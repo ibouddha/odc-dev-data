@@ -49,6 +49,11 @@ export const RandomChoiceSection = () => {
       </div>
       {choices.length > 0 && !loading && <SwiperView choices={choices} muted={muted} />}
       {loading && <SwiperViewSkeleton />}
+      {choices.length === 0 && !loading && (
+        <div className="py-20 px-2 flex justify-center">
+          <h3 className="text-3xl font-bold">Cette promo n&apos;a pas encore d&apos;étudiants</h3>
+        </div>
+      )}
     </div>
   );
 };
@@ -173,14 +178,41 @@ const RandomChoiceDice = ({ isLoandingChoice, handleRandomChoice }) => {
 };
 
 export const SwiperViewSkeleton = () => {
+  const choices = Array.from({ length: 10 }, (_, i) => i + 1);
   return (
     <div className="mt-10 py-4">
 
-    <div className=" flex gap-4 overflow-x-auto scrollbar-none">
-      {[...Array(5).keys()].map((i) => (
-        <RandomChoiceCardSkeleton key={i} />
-      ))}
-    </div>
+<Swiper
+        slidesPerView={1}
+        spaceBetween={10}
+        centeredSlides={true}
+        centeredSlidesBounds={true}
+        className="mySwiper"
+        breakpoints={{
+          550: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 40,
+          },
+          1024: {
+            slidesPerView: 4,
+            spaceBetween: 90,
+          },
+          1078: {
+            slidesPerView: 5,
+            spaceBetween: 30,
+          },
+        }}
+      >
+          {choices.map((choice) => (
+          <SwiperSlide key={choice.id} className="py-10">
+            <RandomChoiceCardSkeleton />
+          </SwiperSlide>
+        ))}
+        </Swiper>
       <div className="mt-8 flex justify-center p-4">
         <RandomChoiceDice
         />
