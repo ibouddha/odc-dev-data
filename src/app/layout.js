@@ -1,5 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/theme/ThemeProvider";
+import clsx from "clsx";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,7 +13,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+            <body className={clsx(inter.className, "bg-[#F0F0F0] dark:bg-slate-800")}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            {children}
+          </ThemeProvider>
+        </body>
     </html>
   );
 }
