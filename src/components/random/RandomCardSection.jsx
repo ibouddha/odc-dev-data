@@ -27,7 +27,7 @@ export const RandomChoiceSection = () => {
   }, [data]);
 
   return (
-    <div className="p-4 bg-white dark:bg-slate-900 rounded-md">
+    <div className="p-4 bg-slate-50 dark:bg-slate-900 rounded-md">
       <div className=" flex justify-between">
         <div>
       <h3 className="text-xl font-bold text-slate-900 dark:text-white">

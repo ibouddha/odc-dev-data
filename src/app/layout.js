@@ -14,7 +14,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-            <body className={clsx(inter.className, "bg-[#F0F0F0] dark:bg-slate-800")}>
+            <body className={clsx(inter.className, "bg-slate-100 dark:bg-slate-800")}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             {children}
           </ThemeProvider>
