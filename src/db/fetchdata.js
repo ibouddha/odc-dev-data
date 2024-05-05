@@ -1,10 +1,27 @@
-import { db, firebaseConfig } from "@/config/firebase";
+import { db } from "@/config/firebase";
 import { collection, getDocs } from "firebase/firestore"; 
 
-export const getStudents = async () => {
-    console.log(firebaseConfig);
-    const querySnapshot = await getDocs(collection(db, "Students"));
+export const getPromos = async () => {
+    const querySnapshot = await getDocs(collection(db, "Promos"));
+    const Promos = [];
     querySnapshot.forEach((doc) => {
-      console.log(`${doc.id} => ${doc.data()}`);
+        Promos.push({
+            id: doc.id, 
+            ...doc.data()
+        });
     });
+    console.log(Promos);
+    return Promos;
+}
+
+export const getStudents = async () => {
+    const querySnapshot = await getDocs(collection(db, "Students"));
+    const students = [];
+    querySnapshot.forEach((doc) => {
+        students.push({
+            id: doc.id, 
+            ...doc.data()
+        });
+    });
+    return students;
 }

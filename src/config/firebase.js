@@ -1,11 +1,12 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
+// Create a root reference
 
 const dotenv = require('dotenv');
 dotenv.config();
-console.log(process.env.API_KEY);
 
 
 export const firebaseConfig = {
@@ -18,10 +19,10 @@ export const firebaseConfig = {
     measurementId: process.env.NEXT_PUBLIC_MEASUREMENT_ID
 };
 
-console.log(firebaseConfig);
 
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 export const db = getFirestore(app);
+export const storage = getStorage(app);

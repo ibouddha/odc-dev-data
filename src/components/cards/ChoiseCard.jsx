@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import Image from "next/image";
 
 export const RandomChoiceCard = ({ choice, active = false }) => {
     return (
@@ -10,14 +11,20 @@ export const RandomChoiceCard = ({ choice, active = false }) => {
         <div className="flex justify-center flex-col items-center">
           <div className="py-[1px] bg-red-500 rounded-lg w-9/12"></div>
           <div className="mt-10 rounded-full h-14 w-14 bg-slate-500 overflow-hidden">
-            <img
-              src={choice?.image}
-              alt={choice?.name}
+            <Image
+              width={100}
+              height={100}
+              src={choice?.avatar ? choice?.avatar : "/images/defaultchoise.png"}
+              alt={choice?.firstName
+              }
               className="fill-black dark:fill-white rounded-full"
             />
           </div>
           <h3 className="text-center jomhuria-regular text-2xl text-white dark:text-black mt-8">
-            {choice?.name}
+            {choice?.firstName
+}
+            <br/>
+            {choice?.lastName}
           </h3>
         </div>
       </div>
