@@ -6,15 +6,17 @@ import { Volume, VolumeX } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
 
 const { SwiperSlide } = require("swiper/react");
-const { RandomChoiceCard, RandomChoiceCardSkeleton } = require("../cards/ChoiseCard");
+const {
+  RandomChoiceCard,
+  RandomChoiceCardSkeleton,
+} = require("../cards/ChoiseCard");
 import { Swiper } from "swiper/react";
 
 export const RandomChoiceSection = () => {
   const [choices, setChoices] = useState([]);
   const [muted, setMuted] = useState(false);
-  const { data, dispatch } = useContext(PromoContext)
+  const { data, dispatch } = useContext(PromoContext);
   const [loading, setLoading] = useState(true);
-
 
   const fetchChoices = async () => {
     setLoading(true);
@@ -33,25 +35,24 @@ export const RandomChoiceSection = () => {
     <div className="p-4 bg-slate-50 dark:bg-slate-900 rounded-md">
       <div className=" flex justify-between">
         <div>
-      <h3 className="text-xl font-bold text-slate-900 dark:text-white">
-        Random Choice
-      </h3>
-      <div className="mt-2 py-[1px] w-32 bg-slate-900 dark:bg-white"></div>
-
+          <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+            Random Choice
+          </h3>
+          <div className="mt-2 py-[1px] w-32 bg-slate-900 dark:bg-white"></div>
         </div>
-        <button
-        onClick={() => setMuted(!muted)}
-        >
-        {
-        !muted ? (<Volume />) : (<VolumeX />)
-      }
+        <button onClick={() => setMuted(!muted)}>
+          {!muted ? <Volume /> : <VolumeX />}
         </button>
       </div>
-      {choices.length > 0 && !loading && <SwiperView choices={choices} muted={muted} />}
+      {choices.length > 0 && !loading && (
+        <SwiperView choices={choices} muted={muted} />
+      )}
       {loading && <SwiperViewSkeleton />}
       {choices.length === 0 && !loading && (
         <div className="py-20 px-2 flex justify-center">
-          <h3 className="text-3xl font-bold">Cette promo n&apos;a pas encore d&apos;étudiants</h3>
+          <h3 className="text-3xl font-bold">
+            Cette promo n&apos;a pas encore d&apos;étudiants
+          </h3>
         </div>
       )}
     </div>
@@ -59,11 +60,10 @@ export const RandomChoiceSection = () => {
 };
 
 const SwiperView = ({ choices = [], muted }) => {
-  const [swipper , setSwipper] = useState({});
+  const [swipper, setSwipper] = useState({});
   const [showDefaultChoice, setShowDefaultChoice] = useState(true);
   const [isLoandingChoice, setIsLoandingChoice] = useState(false);
   const [prevChoise, setPrevChoise] = useState(null);
-
 
   const lenChoices = choices.length;
   const leftChoice = choices.slice(0, Math.ceil(lenChoices / 2));
@@ -74,7 +74,7 @@ const SwiperView = ({ choices = [], muted }) => {
       const audio = new Audio("/sounds/wheel-spin.mp3");
       audio.play();
     }
-  }
+  };
 
   const handleRandomChoice = () => {
     let random = Math.floor(Math.random() * choices.length);
@@ -93,9 +93,6 @@ const SwiperView = ({ choices = [], muted }) => {
     setPrevChoise(random);
   };
 
-
-
-  
   return (
     <div className="mt-10 py-4">
       <Swiper
@@ -117,13 +114,17 @@ const SwiperView = ({ choices = [], muted }) => {
             slidesPerView: 3,
             spaceBetween: 40,
           },
-          1024: {
-            slidesPerView: 4,
-            spaceBetween: 90,
+          1037 : {
+            slidesPerView: 2,
+            spaceBetween: 40,
           },
           1078: {
             slidesPerView: 5,
             spaceBetween: 30,
+          },
+          1038: {
+            slidesPerView: 5,
+            spaceBetween: 100,
           },
         }}
       >
@@ -134,9 +135,7 @@ const SwiperView = ({ choices = [], muted }) => {
         ))}
         {showDefaultChoice && (
           <SwiperSlide key={defaultChoice.id} className="py-10">
-            <RandomChoiceCard
-              choice={defaultChoice}
-            />
+            <RandomChoiceCard choice={defaultChoice} />
           </SwiperSlide>
         )}
         {rightChoice.map((choice) => (
@@ -157,8 +156,10 @@ const SwiperView = ({ choices = [], muted }) => {
 
 const RandomChoiceDice = ({ isLoandingChoice, handleRandomChoice }) => {
   return (
-    <button title="Random Choice" onClick={handleRandomChoice}
-    disabled={isLoandingChoice}
+    <button
+      title="Random Choice"
+      onClick={handleRandomChoice}
+      disabled={isLoandingChoice}
     >
       <svg
         width="80"
@@ -181,8 +182,7 @@ export const SwiperViewSkeleton = () => {
   const choices = Array.from({ length: 10 }, (_, i) => i + 1);
   return (
     <div className="mt-10 py-4">
-
-<Swiper
+      <Swiper
         slidesPerView={1}
         spaceBetween={10}
         centeredSlides={true}
@@ -207,16 +207,15 @@ export const SwiperViewSkeleton = () => {
           },
         }}
       >
-          {choices.map((choice) => (
+        {choices.map((choice) => (
           <SwiperSlide key={choice.id} className="py-10">
             <RandomChoiceCardSkeleton />
           </SwiperSlide>
         ))}
-        </Swiper>
+      </Swiper>
       <div className="mt-8 flex justify-center p-4">
-        <RandomChoiceDice
-        />
+        <RandomChoiceDice />
       </div>
     </div>
   );
-}
+};
