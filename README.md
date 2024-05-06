@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+🚀 **Appel à contribution !** 🚀
 
-## Getting Started
+Cher(e) membre de la communauté de dev data l'Orange Digital Center,
 
-First, run the development server:
+Nous vous invitons à contribuer à l'amélioration et à l'expansion de notre plateforme en partageant vos idées, vos compétences et votre expertise. Notre objectif est de créer un environnement collaboratif où chacun peut apporter sa pierre à l'édifice pour soutenir et renforcer notre communauté.
+
+Team Notion : https://www.notion.so/invite/8dabcc1560363cea85ebb60b58ccbea52543dc6a
+
+
+### CONTRIBUER 
+***
+
+**Forker le Project**
+
+D'abord forker le projet en apuyant sur le button `Fork`
+
+Puis ouver votre terminal et cloner le projet (qui se trouve deja dans votre repositorie)
+
+```bash
+git clone https://github.com/[VOTRE_USERNAME]/odc-dev-data
+```
+
+Puis lancer la commande selon votre gestionnaire de package (npm, yarn, pnpm)
+
+```bash
+npm install
+```
+
+```bash
+yarn install
+```
+
+```bash
+pnpm install
+```
+
+Creer un fichier .env dans la racine du projet et ajouter les variables que vous trouverez dans [`notion`](https://www.notion.so/Firebase-794e41a6c01f4c2eaab509814e50ae4f?pvs=4)
+
+**Lancer l'application**
+
+Lancer l'application en appuyant avec la commande 
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Pour voir l'application sur http://localhost:3000
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### C'est a vous de Jouer !
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+**Faites vos contributions !**
 
-## Learn More
+explorer le code base et aporter des modifications et les sugetion que vous voulez
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Soumetez un pull request
+****
 
-## Deploy on Vercel
+apres avoir apporter vos modifications et les sugetion que vous voulez
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+lancer les commandes
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+**POV : Nommez bien vos commits et vos pull request**
+lien utile => https://www.conventionalcommits.org/
+
+
+```bash
+git add .
+git commit -m "message"
+git push
+```
+
+
+**C'est parti pour le pull request !**
+
+ouvrir git hub  et apuyer sur le button `pull requests` puis `new pull request` et suivez la procedure
+
+
+
+
+
