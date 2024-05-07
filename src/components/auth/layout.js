@@ -5,6 +5,7 @@ import ToggleTheme from "@/theme/ToggleTheme";
 import { Separator } from "@radix-ui/react-separator";
 import { usePathname, useRouter } from "next/navigation";
 import { kdebug } from "@/constants";
+import { LoginWithGithub, LoginWithGoogle } from "@/db/auth/login";
 
 export const AuthLayout = ({ children, image }) => {
 
