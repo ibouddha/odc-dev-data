@@ -1,5 +1,5 @@
 import ToggleTheme from "@/theme/ToggleTheme";
-import { Dices } from "lucide-react";
+import { Dices, LogIn, UserPlus } from "lucide-react";
 import Image from "next/image";
 
 export default function Home() {
@@ -36,6 +36,24 @@ export default function Home() {
                   >
                     Random Choice
                     <Dices />
+                  </a>
+                </li>
+                <li className="p-2 bg-slate-200 dark:bg-slate-900  hover:bg-slate-300 dark:hover:bg-slate-700 ">
+                  <a
+                    className="font-semibold text-slate-900 dark:text-white flex items-center justify-between"
+                    href="/inside/auth/login"
+                  >
+                    Log In
+                    <LogIn />
+                  </a>
+                </li>
+                <li className="p-2 bg-slate-200 dark:bg-slate-900  hover:bg-slate-300 dark:hover:bg-slate-700 ">
+                  <a
+                    className="font-semibold text-slate-900 dark:text-white flex items-center justify-between"
+                    href="/inside/auth/register"
+                  >
+                    Register
+                    <UserPlus />
                   </a>
                 </li>
               </ul>
