@@ -1,19 +1,43 @@
+"use client";
+
 import { LoginForm } from "@/components/auth/LoginForm";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { kdebug } from "@/constants";
+import { LoginWithGithub, LoginWithGoogle } from "@/db/auth/login";
 import ToggleTheme from "@/theme/ToggleTheme";
 import { ChevronLeft } from "lucide-react";
 import React from "react";
 
 const login = () => {
-  return <AuthLayout image="/l.jpg">
+  const handleProviderLogin = async (provider) => {
+    try {
+      let userCredential;
+      if (provider === "google") {
+         userCredential = await LoginWithGoogle()
+      }
+      if (provider === "github") {
+        userCredential = await LoginWithGithub()
+      }
+      if (userCredential) {
+        kdebug(`User: ${userCredential}`)
+      } else {
+        // setError({title: 'Invalide', message: 'identifiants invalides'})
+      }
+    } catch (error) {
+      kdebug(`Error here: ${error}`)
+    }
+}
+  return <AuthLayout image="/l.jpg" handleProviderLogin={handleProviderLogin}>
+
     <LoginForm/>
   </AuthLayout>;
 };
 
 export default login;
 
-const AuthLayout = ({ children, image }) => {
+
+const AuthLayout = ({ children, image , ...props}) => {
   return (
     <div className="sm:h-screen w-full max-w-6xl mx-auto sm:py-10">
       <div className="w-full h-full sm:flex">
@@ -49,7 +73,10 @@ const AuthLayout = ({ children, image }) => {
           </div>
           <Separator />
           <div className="mt-4 flex flex-col gap-3">
-            <Button variant="outline" className="w-full dark:hover:bg-slate-900 gap-4 h-auto font-bold">
+            <Button variant="outline" className="w-full dark:hover:bg-slate-900 gap-4 h-auto font-bold"
+              onClick={() => props.handleProviderLogin("google")}
+              type="button"
+            >
               <svg
                 viewBox="0 0 32 32"
                 className="fill-none h-8 w-8"
@@ -74,7 +101,9 @@ const AuthLayout = ({ children, image }) => {
               </svg>
               login with Google
             </Button>
-            <Button variant="outline" className="w-full dark:hover:bg-slate-900 gap-4 h-auto font-bold">
+            <Button variant="outline" className="w-full dark:hover:bg-slate-900 gap-4 h-auto font-bold"
+            onClick={() => props.handleProviderLogin("github")}
+            >
               <svg
                 className=" h-8 w-8"
                 viewBox="0 0 20 20"

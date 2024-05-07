@@ -5,8 +5,8 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Button } from "../ui/button";
 import { kdebug } from "@/constants";
-import { LoginWithEmailAndPassword } from "@/db/auth/login";
-import { AlertCircle, Loader, X } from "lucide-react";
+import { LoginWithEmailAndPassword, LoginWithGoogle } from "@/db/auth/login";
+import { AlertCircle, Loader } from "lucide-react";
 import {   Alert,
     AlertDescription,
     AlertTitle, } from "../ui/alert";
@@ -27,7 +27,6 @@ export const LoginForm = () => {
       setError(null)
       try {
         if (!UserFormValidation(user, setError)) return
-        kdebug(`Email: ${user.email} Password: ${user.password}`)
         const userCredential = await LoginWithEmailAndPassword(user)
         if (userCredential) {
           kdebug(`User: ${userCredential}`)
@@ -35,10 +34,15 @@ export const LoginForm = () => {
           setError({title: 'Invalide', message: 'identifiants invalides'})
         }
       } catch (error) {
+        kdebug(`Error: ${error}`)
       } finally {
         setIsLoading(false)
       }
     }
+
+
+
+
   return (
     <form className="flex flex-col gap-4" onSubmit={onSubmit}>
     {error && <Alert className="w-full" variant="destructive">

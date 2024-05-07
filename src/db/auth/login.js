@@ -1,6 +1,6 @@
-import { auth } from '@/config/firebase';
+import { auth, gihubProvider, googleProvider } from '@/config/firebase';
 import { kdebug } from '@/constants'
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import React from 'react'
 
 export const LoginWithEmailAndPassword  = async (user) => {
@@ -11,6 +11,37 @@ export const LoginWithEmailAndPassword  = async (user) => {
             return userCredential
         } else {
             kdebug(`User not found`)
+            return null
+        }
+    } catch (error) {
+        kdebug(`Error: ${error}`)
+    }
+}
+
+
+export const LoginWithGoogle = async () => {
+    try {
+        const result = await signInWithPopup(auth, googleProvider);
+        if (result) {
+            const user = result.user
+            console.log(user);
+            return user
+        } else {
+            return null
+        }
+    } catch (error) {
+        kdebug(`Error: ${error}`)
+    }
+}
+
+export const LoginWithGithub = async () => {
+    try {
+        const result = await signInWithPopup(auth, gihubProvider);
+        if (result) {
+            const user = result.user
+            console.log(user);
+            return user
+        } else {
             return null
         }
     } catch (error) {
