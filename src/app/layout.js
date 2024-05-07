@@ -3,6 +3,8 @@ import "./globals.css";
 import { ThemeProvider } from "@/theme/ThemeProvider";
 import clsx from "clsx";
 import "swiper/css";
+import 'notyf/notyf.min.css';
+
 
 const inter = Inter({ subsets: ["latin"] });
 

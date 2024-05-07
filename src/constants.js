@@ -1,3 +1,5 @@
+const debug = true;
+
 export const defaultAvatar = "https://firebasestorage.googleapis.com/v0/b/odc-dev-data.appspot.com/o/students%2Favatars%2Fdefault-person.png?alt=media&token=12f6a80a-395c-4abf-bd8f-c575ea922dbc"
 
 export   const defaultChoice = {
@@ -42,3 +44,7 @@ export const bgColors = [
   "bg-rose-500",
   "bg-sky-500",
 ]
+
+export const kdebug =(message) =>{
+    console.log(message)
+}
