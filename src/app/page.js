@@ -1,10 +1,10 @@
 import ToggleTheme from "@/theme/ToggleTheme";
-import { Dices, LogIn, UserPlus } from "lucide-react";
+import { Dices, LogIn, UserPlus, UserSearch } from "lucide-react";
 import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="flex flex-col bg-slate-100 dark:bg-slate-800 p-4 h-screen max-w-md border-r border-l dark:border-slate-700 mx-auto">
+    <div className="flex flex-col  p-4 h-screen max-w-md border-r border-l dark:border-slate-700 mx-auto">
       {/* Header */}
       <div className="p-4 flex justify-between items-center">
         <div>
@@ -54,6 +54,15 @@ export default function Home() {
                   >
                     Register
                     <UserPlus />
+                  </a>
+                </li>
+                <li className="p-2 bg-slate-200 dark:bg-slate-900  hover:bg-slate-300 dark:hover:bg-slate-700 ">
+                  <a
+                    className="font-semibold text-slate-900 dark:text-white flex items-center justify-between"
+                    href="/service/profiles"
+                  >
+                    Profiles
+                    <UserSearch />
                   </a>
                 </li>
               </ul>
