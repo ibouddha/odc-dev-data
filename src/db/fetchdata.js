@@ -10,7 +10,6 @@ export const getPromos = async () => {
             ...doc.data()
         });
     });
-    console.log(Promos);
     return Promos;
 }
 

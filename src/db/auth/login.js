@@ -24,7 +24,6 @@ export const LoginWithGoogle = async () => {
         const result = await signInWithPopup(auth, googleProvider);
         if (result) {
             const user = result.user
-            console.log(user);
             return user
         } else {
             return null
@@ -39,7 +38,6 @@ export const LoginWithGithub = async () => {
         const result = await signInWithPopup(auth, gihubProvider);
         if (result) {
             const user = result.user
-            console.log(user);
             return user
         } else {
             return null

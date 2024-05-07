@@ -1,4 +1,5 @@
 import { db, storage } from "@/config/firebase";
+import { kdebug } from "@/constants";
 import { addDoc, collection } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
@@ -7,7 +8,7 @@ export const addDocument = async (collectionName, data) => {
     const docRef = await addDoc(collection(db, collectionName),data);   
       return docRef;
     } catch (error) {
-      console.log(error);
+      kdebug(`Error: ${error}`)
     }
   };
   
@@ -22,6 +23,6 @@ export const uploadImage = async (file, path) => {
         }
 
     } catch (error) {
-        console.log(error);
+        kdebug(`Error: ${error}`)
     }
 }

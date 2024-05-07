@@ -20,7 +20,6 @@ export const TopBar = () => {
 
   const fetchPromos = async () => {
     const result = await getPromos();
-    console.log("result", result);
     if (result && data) {
       const new_promos = result.filter(
         (promo) => {

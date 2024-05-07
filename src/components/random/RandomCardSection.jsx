@@ -78,8 +78,6 @@ const SwiperView = ({ choices = [], muted }) => {
 
   const handleRandomChoice = () => {
     let random = Math.floor(Math.random() * choices.length);
-    console.log(prevChoise);
-    console.log(random);
     while (prevChoise === random) {
       random = Math.floor(Math.random() * choices.length);
     }

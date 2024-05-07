@@ -1,4 +1,5 @@
 "use client";
+import { kdebug } from '@/constants';
 import { addDocument, uploadImage } from '@/db/addData';
 import React, { useState } from 'react';
 
@@ -28,7 +29,7 @@ const AddStudent = () => {
             addDocument('Students', {firstName, lastName, email, phone, avatar: null, promo_id : "CXk8MUhrPNP1iEP8wxi1"});
         }
     } catch (error) {
-        console.log(error);
+        kdebug(`Error: ${error}`)
     } finally {
         setLoading(false);
     }
