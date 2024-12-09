@@ -3,69 +3,64 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Bookmark, User } from "lucide-react";
 import { Button } from "../ui/button";
 import { bgColors } from "@/constants";
+import { Truncate } from "@/lib/truncate";
+import { Separator } from "../ui/separator";
 
-export const ServiceLayoutListItem = () => {
-  const skills = [
-    "HTML",
-    "CSS",
-    "Javascript",
-    "React/Nextjs",
-    "Svelte",
-    "Angular",
-  ];
+export const ServiceLayoutListItem = ({
+  avatarUrl,
+  name,
+  role,
+  skills,
+  description,
+  seniority,
+  email,
+}) => {
   return (
-    <div className="p-4 bg-slate-50 dark:bg-slate-900 rounded-md hover:bg-background hover:border hover:border-cyan-500 hover:shadow">
-      <div className="flex justify-between items-center">
-        <div className="flex flex-col gap-4">
-
-        <div className="flex items-center gap-2">
+    <div className="p-4 bg-slate-50 dark:bg-slate-900 rounded-md hover:shadow hover:border hover:border-cyan-500">
+      <div className="flex items-start justify-between">
+        <div className="flex justify-center items-center gap-2">
           <Avatar className="w-12 h-12">
-            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+            <AvatarImage src={avatarUrl} alt={name} />
             <AvatarFallback>
               <User className="w-5 h-5" />
             </AvatarFallback>
           </Avatar>
           <div>
-            <h4 className="font-bold text-slate-600 dark:text-slate-100">
-              Mouhamed Lamotte
-            </h4>
-            <h6 className="text-sm text-slate-400 dark:text-slate-200">
-              Web Developer
-            </h6>
+            <h4 className="font-bold text-slate-600 dark:text-slate-100">{name}</h4>
+            <h6 className="text-sm text-slate-400 dark:text-slate-200">{role}</h6>
           </div>
         </div>
-        <div className="" >
-          <ul className="flex gap-4 overflow-x-auto py-2 max-w-96 md:max-w-full p-3 rounded-md border md:px-0 md:border-none scrollbar-none">
-            {skills.map((skill) => (
-              <li
-                className={`text-sm font-semibold px-2 rounded-md text-slate-100 p-1 ${
-                  bgColors[Math.floor(Math.random() * bgColors.length)]
-                }`}
-                key={skill}
-              >
-                {skill}
-              </li>
-            ))}
-          </ul>
-        </div>
-        </div>
-        <div className="flex flex-col gap-4  items-end">
-        <div className="flex items-center gap-2">
-
-        <p className="px-4 py-1 rounded-md text-xs bg-cyan-500/40 text-cyan-500 dark:text-slate-100 font-semibold" >
-              Senior
-              </p>
-          <Button className="p-2 text-slate-500" variant="ghost">
+        <Button className="p-2 text-slate-500" variant="ghost">
           <Bookmark />
-          </Button>
-              </div>
-          <Button
-            className="p-2 text-slate-500 dark:text-slate-100 w-full bg-slate-200/20" 
-            variant="ghost"
-          >
-            voir le profil
-          </Button>
-        </div>
+        </Button>
+      </div>
+      <div className="mt-4 w-full " orientation="horizontal">
+        <ul className="flex gap-4 overflow-x-auto py-2 scrollbar-none">
+          {skills?.map((skill) => (
+            <li
+              className={`text-sm font-semibold px-2 rounded-md text-slate-100 p-1 ${
+                bgColors[Math.floor(Math.random() * bgColors.length)]
+              }`}
+              key={skill}
+            >
+              {skill}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="mt-3 mb-4">
+        <p className="text-sm text-slate-700 dark:text-slate-100">
+          <Truncate str={description} max={60} len={60} />
+        </p>
+      </div>
+      <Separator className="mt-4" />
+      <div className="flex justify-between mt-4 items-center">
+        <p className="px-4 py-1 rounded-md text-xs bg-cyan-500/40 text-cyan-500 dark:text-slate-100 font-semibold">
+          {seniority}
+        </p>
+        <Button className="p-2 text-slate-500 dark:text-slate-100" variant="ghost">
+          Voir le profil
+        </Button>
       </div>
     </div>
   );

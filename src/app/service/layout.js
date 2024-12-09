@@ -1,7 +1,6 @@
 "use client";
 
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
+
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -12,17 +11,18 @@ import {
   User,
 } from "lucide-react";
 import ToggleTheme from "@/theme/ToggleTheme";
-import { Separator } from "../ui/separator";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { SelectScrollable } from "../ui/selectScrollable";
-import { ServiceLayoutContent } from "./ServiceLayoutContent";
+import { SelectScrollable } from "@/components/ui/selectScrollable";
+import { Separator } from "@/components/ui/separator";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
-export const ServiceLayout = ({ children }) => {
+const ServiceLayout = ({ children }) => {
   return (
     <div className="h-screen overflow-hidden flex flex-col ">
       <ServiceNav />
       <FilterTab />
-      <ServiceLayoutContent />
+      {children}
     </div>
   );
 };
@@ -153,7 +153,7 @@ const ServiceNav = () => {
             <Button variant="ghost" className="gap-2 p-2 justify-between">
               <Avatar className="w-8 h-8">
                 <AvatarImage
-                  src="https://github.com/sa.png"
+                  src="https://github.com/sonatel-academy.png"
                   alt="@shadcn"
                 />
                 <AvatarFallback>
@@ -177,7 +177,4 @@ const ServiceNav = () => {
 
 
 
-
-
-
-
+export default ServiceLayout;
