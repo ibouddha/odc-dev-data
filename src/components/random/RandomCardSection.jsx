@@ -1,57 +1,69 @@
 import { defaultChoice } from "@/constants";
+import { PromoContext } from "@/context/PromoContext";
 import { getStudents } from "@/db/fetchdata";
 import clsx from "clsx";
 import { Volume, VolumeX } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 const { SwiperSlide } = require("swiper/react");
-const { RandomChoiceCard } = require("../cards/ChoiseCard");
+const {
+  RandomChoiceCard,
+  RandomChoiceCardSkeleton,
+} = require("../cards/ChoiseCard");
 import { Swiper } from "swiper/react";
 
 export const RandomChoiceSection = () => {
   const [choices, setChoices] = useState([]);
   const [muted, setMuted] = useState(false);
+  const { data, dispatch } = useContext(PromoContext);
+  const [loading, setLoading] = useState(true);
 
   const fetchChoices = async () => {
-    const data = await getStudents();
-    if (data) {
-      setChoices(data);
+    setLoading(true);
+    const result = await getStudents(data?.promo?.id);
+    if (result) {
+      setChoices(result);
     }
+    setLoading(false);
   };
 
   useEffect(() => {
     fetchChoices();
-  }, []);
+  }, [data]);
 
   return (
-    <div className="p-4 bg-white dark:bg-slate-900 rounded-md">
+    <div className="p-4 bg-slate-50 dark:bg-slate-900 rounded-md">
       <div className=" flex justify-between">
         <div>
-      <h3 className="text-xl font-bold text-slate-900 dark:text-white">
-        Random Choice
-      </h3>
-      <div className="mt-2 py-[1px] w-32 bg-slate-900 dark:bg-white"></div>
-
+          <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+            Random Choice
+          </h3>
+          <div className="mt-2 py-[1px] w-32 bg-slate-900 dark:bg-white"></div>
         </div>
-        <button
-        onClick={() => setMuted(!muted)}
-        >
-        {
-        !muted ? (<Volume />) : (<VolumeX />)
-      }
+        <button onClick={() => setMuted(!muted)}>
+          {!muted ? <Volume /> : <VolumeX />}
         </button>
       </div>
-      {choices.length > 0 && <SwiperView choices={choices} muted={muted} />}
+      {choices.length > 0 && !loading && (
+        <SwiperView choices={choices} muted={muted} />
+      )}
+      {loading && <SwiperViewSkeleton />}
+      {choices.length === 0 && !loading && (
+        <div className="py-20 px-2 flex justify-center">
+          <h3 className="text-3xl font-bold">
+            Cette promo n&apos;a pas encore d&apos;étudiants
+          </h3>
+        </div>
+      )}
     </div>
   );
 };
 
 const SwiperView = ({ choices = [], muted }) => {
-  const [swipper , setSwipper] = useState({});
+  const [swipper, setSwipper] = useState({});
   const [showDefaultChoice, setShowDefaultChoice] = useState(true);
   const [isLoandingChoice, setIsLoandingChoice] = useState(false);
   const [prevChoise, setPrevChoise] = useState(null);
-
 
   const lenChoices = choices.length;
   const leftChoice = choices.slice(0, Math.ceil(lenChoices / 2));
@@ -62,16 +74,13 @@ const SwiperView = ({ choices = [], muted }) => {
       const audio = new Audio("/sounds/wheel-spin.mp3");
       audio.play();
     }
-  }
+  };
 
   const handleRandomChoice = () => {
     let random = Math.floor(Math.random() * choices.length);
-    console.log(prevChoise);
-    console.log(random);
     while (prevChoise === random) {
       random = Math.floor(Math.random() * choices.length);
     }
-    // let choice = choices[random];
     playSound();
     swipper.slideTo(random, 2000);
     setShowDefaultChoice(false);
@@ -82,9 +91,6 @@ const SwiperView = ({ choices = [], muted }) => {
     setPrevChoise(random);
   };
 
-
-
-  
   return (
     <div className="mt-10 py-4">
       <Swiper
@@ -106,11 +112,15 @@ const SwiperView = ({ choices = [], muted }) => {
             slidesPerView: 3,
             spaceBetween: 40,
           },
-          1024: {
-            slidesPerView: 4,
-            spaceBetween: 90,
+          1037 : {
+            slidesPerView: 2,
+            spaceBetween: 40,
           },
           1078: {
+            slidesPerView: 5,
+            spaceBetween: 30,
+          },
+          1038: {
             slidesPerView: 5,
             spaceBetween: 100,
           },
@@ -123,9 +133,7 @@ const SwiperView = ({ choices = [], muted }) => {
         ))}
         {showDefaultChoice && (
           <SwiperSlide key={defaultChoice.id} className="py-10">
-            <RandomChoiceCard
-              choice={defaultChoice}
-            />
+            <RandomChoiceCard choice={defaultChoice} />
           </SwiperSlide>
         )}
         {rightChoice.map((choice) => (
@@ -146,7 +154,11 @@ const SwiperView = ({ choices = [], muted }) => {
 
 const RandomChoiceDice = ({ isLoandingChoice, handleRandomChoice }) => {
   return (
-    <button title="Random Choice" onClick={handleRandomChoice}>
+    <button
+      title="Random Choice"
+      onClick={handleRandomChoice}
+      disabled={isLoandingChoice}
+    >
       <svg
         width="80"
         height="80"
@@ -161,5 +173,47 @@ const RandomChoiceDice = ({ isLoandingChoice, handleRandomChoice }) => {
         />
       </svg>
     </button>
+  );
+};
+
+export const SwiperViewSkeleton = () => {
+  const choices = Array.from({ length: 10 }, (_, i) => i + 1);
+  return (
+    <div className="mt-10 py-4">
+      <Swiper
+        slidesPerView={1}
+        spaceBetween={10}
+        centeredSlides={true}
+        centeredSlidesBounds={true}
+        className="mySwiper"
+        breakpoints={{
+          550: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 40,
+          },
+          1024: {
+            slidesPerView: 4,
+            spaceBetween: 90,
+          },
+          1078: {
+            slidesPerView: 5,
+            spaceBetween: 30,
+          },
+        }}
+      >
+        {choices.map((choice) => (
+          <SwiperSlide key={choice.id} className="py-10">
+            <RandomChoiceCardSkeleton />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+      <div className="mt-8 flex justify-center p-4">
+        <RandomChoiceDice />
+      </div>
+    </div>
   );
 };

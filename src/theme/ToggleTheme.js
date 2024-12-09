@@ -4,25 +4,24 @@
 import React from "react";
 import { Moon, SunMedium } from "lucide-react";
 import { useTheme } from 'next-themes'
+import { Button } from "@/components/ui/button";
 
 
 const ToggleTheme = () => {
     const {setTheme, theme} = useTheme()
 
   return (
-    <button 
+    <Button variant="ghost" 
     onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-    className="rounded-full h-8 px-3 text-x inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:text-accent-foreground">
+    className="relative p-2">
       <SunMedium
-        size={30}
         className="rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 text-primary"
       />
       <Moon
-        size={30}
         className="absolute rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
       />
       <span className="sr-only">Toggle theme</span>
-    </button>
+    </Button>
   );
 };
 
